@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Pokemon Cachipun</title>
+    <style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -307,6 +315,148 @@ main {
     }
 
     #ganador {
-        top: calc(50% + 320px);
+        top: calc(50% + 350px);
     }
 }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div class="control">
+            <div>
+                <h3>POKEPÚN</h3>
+                <input type="button" value="RESET" id="reset">
+                <input type="button" value="JUGAR" id="play">
+                <div>
+                    <h4>Instrucciones</h4>
+                    <p>El entrenador Pokémon debe elegir un elemento a ciegas v/s el elemento del Entrenador rival.</p>
+                </div>
+            </div>
+            <div class="eleccion">
+                <h5>Elección Jugador</h5>
+                <ul class="choice"></ul>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div id="trueno" class="opcion franja franja1">
+            <div class="texto">TRUENO</div>
+        </div>
+        <div id="agua" class="opcion franja franja2">
+            <div class="texto">AGUA</div>
+        </div>
+        <div id="roca" class="opcion franja franja3">
+            <div class="texto">ROCA</div>
+        </div>
+        <div id="planta" class="opcion franja franja4">
+            <div class="texto">PLANTA</div>
+        </div>
+        <div id="fuego" class="opcion franja franja5">
+            <div class="texto">FUEGO</div>
+        </div>
+        <!-- Añade esto en tu HTML -->
+        <div id="resultado" style="display: none;"></div>
+        <div id="ganador" style="display: none;"></div>
+                </div>
+    </main>
+    <script>
+        let eleccionUser = "";
+
+const elementos = {
+    trueno: {
+        color: "#FFD700",
+        imagen: "/Rock/assets/img/1.jpeg"
+    },
+    agua: {
+        color: "#1E90FF",
+        imagen: "/Rock/assets/img/2.jpeg"
+    },
+    roca: {
+        color: "#8B4513",
+        imagen: "/Rock/assets/img/3.jpeg"
+    },
+    planta: {
+        color: "#228B22",
+        imagen: "/Rock/assets/img/4.jpeg"
+    },
+    fuego: {
+        color: "#FF4500",
+        imagen: "/Rock/assets/img/5.jpeg"
+    }
+};
+
+document.querySelectorAll('.opcion').forEach(opcion => {
+    opcion.addEventListener('click', (event) => {
+        document.querySelectorAll('.opcion').forEach(opt => {
+            opt.classList.remove('seleccionado');
+        });
+
+        event.currentTarget.classList.add('seleccionado');
+        eleccionUser = event.currentTarget.id;
+        console.log(`La elección del usuario es: ${eleccionUser}`);
+
+        document.body.style.backgroundColor = elementos[eleccionUser].color;
+
+        document.querySelector('.choice').innerHTML = `<h2>${eleccionUser}</h2>`;
+        document.querySelector('.choice').style.color = elementos[eleccionUser].color;
+    });
+});
+
+document.getElementById('play').addEventListener('click', () => {
+    document.querySelectorAll('.opcion').forEach(opcion => {
+        opcion.classList.add('salida');
+    });
+
+    const elecciones = Object.keys(elementos);
+    const eleccionEnemigo = elecciones[Math.floor(Math.random() * elecciones.length)];
+    console.log(`La elección del enemigo es: ${eleccionEnemigo}`);
+
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.innerHTML = `Tú elección es <strong>${eleccionUser}</strong> vs elección del ENEMIGO <strong>${eleccionEnemigo}</strong>`;
+    resultadoDiv.style.display = 'block';
+
+    let ganador = "";
+    if (eleccionUser === eleccionEnemigo) {
+        ganador = "¡Es un empate!";
+        document.body.style.backgroundImage = `url('${elementos[eleccionUser].imagen}')`;
+    } else {
+        if (
+            (eleccionUser === 'trueno' && (eleccionEnemigo === 'agua' || eleccionEnemigo === 'planta')) ||
+            (eleccionUser === 'agua' && (eleccionEnemigo === 'fuego' || eleccionEnemigo === 'roca')) ||
+            (eleccionUser === 'roca' && (eleccionEnemigo === 'trueno' || eleccionEnemigo === 'fuego')) ||
+            (eleccionUser === 'planta' && (eleccionEnemigo === 'roca' || eleccionEnemigo === 'agua')) ||
+            (eleccionUser === 'fuego' && (eleccionEnemigo === 'planta' || eleccionEnemigo === 'trueno'))
+        ) {
+            ganador = "¡Tú ganaste!";
+            document.body.style.backgroundImage = `url('${elementos[eleccionUser].imagen}')`;
+        } else {
+            ganador = "¡El enemigo ganó!";
+            document.body.style.backgroundImage = `url('${elementos[eleccionEnemigo].imagen}')`;
+        }
+    }
+
+    const ganadorDiv = document.getElementById('ganador');
+    ganadorDiv.innerHTML = ganador;
+    ganadorDiv.style.display = 'block';
+
+    setTimeout(() => {
+        document.querySelectorAll('.opcion').forEach(opcion => {
+            opcion.classList.remove('salida');
+        });
+
+        resultadoDiv.style.display = 'none';
+        ganadorDiv.style.display = 'none';
+
+        document.body.style.backgroundColor = "";
+        document.body.style.backgroundImage = "";
+    }, 6000);
+});
+
+document.getElementById('reset').addEventListener('click', () => {
+    location.reload();
+});
+
+    </script>
+</body>
+</html>
