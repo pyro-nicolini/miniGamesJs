@@ -1,0 +1,44 @@
+html {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6b6b, #f7c94c, #3dc4c8, #b85fc1);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+.container {
+    text-align: center;
+    color: rgb(255, 255, 255); 
+}
+
+input, button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px !important;
+    border-color: #f7c94c;
+    border-radius: 5px;
+    font-size: 16px;
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    color: rgb(255, 145, 0);
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

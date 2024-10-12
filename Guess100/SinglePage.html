@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Aplicación JS</title>
+    <style>
+        html {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6b6b, #f7c94c, #3dc4c8, #b85fc1);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+.container {
+    text-align: center;
+    color: rgb(255, 255, 255); 
+}
+
+input, button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px !important;
+    border-color: #f7c94c;
+    border-radius: 5px;
+    font-size: 16px;
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    color: rgb(255, 145, 0);
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adivina el numero</h1>
+        <div id="game">
+            <h3>Entre 0 al 100. ¿Puedes ganar en 10 intentos?</h3>
+            <input type="text" placeholder="Numero entre 1 y 100" id="entrada">
+            <input type="Submit" id="boton" value="Jugar">
+        </div>
+        <div>
+            <h3>Estadisticas</h3>
+            <ol id="stats"></ol>
+        </div>
+    </div>
+</body>
+<script>
+    const genNumber = Math.ceil(Math.random() * 100);
+console.log(genNumber);
+const num = document.getElementById('entrada');
+
+let games = 1;
+const maxGames = 10;
+
+document.getElementById('boton').addEventListener('click', (event) => {
+    if (games > maxGames) {
+        alert("GAME OVER");
+        num.value = "";
+        return;
+    }
+    
+    const sinEspacios = num.value.trim();
+    const redondeado = Math.floor(Number(sinEspacios));
+
+  
+    if (sinEspacios !== "" && !isNaN(redondeado) && redondeado >= 1 && redondeado <= 100) {
+        mostrarNumeros(redondeado);
+        games++;
+    } else {
+        num.value = "";
+        alert("Ingrese un número válido entre 1 y 100");
+    }
+});
+
+function mostrarNumeros(userGuess) {
+    const stat = document.getElementById('stats');
+    let elecciones = document.createElement(`li`); 
+    stat.appendChild(elecciones);
+    elecciones.textContent = compararNumeros(userGuess);
+    num.value = ""; 
+}
+
+function compararNumeros(userGuess) {
+    if (userGuess === genNumber) {
+        alert("¡GANASTE!"); 
+        games = maxGames + 1; 
+        return `Ganaste con ${userGuess}`;
+    } else if (userGuess > genNumber) {
+        return `Te pasaste, no es el ${userGuess}`; 
+    } else {
+        return `Te faltó, no es el ${userGuess}`; 
+    }
+}
+
+</script>
+</html>
