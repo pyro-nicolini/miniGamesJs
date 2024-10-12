@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden; /* Oculta la parte inferior de las franjas */
+    background-color: rgba(211, 211, 211, 0.389);
+}
+
+.control {
+    background-color: rgb(91, 91, 91);
+    display: grid;
+    margin-top: 20px;
+    padding-top: 30px;
+    width: 160px;
+    text-align: start;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+h3 {
+    font-size: 12px;
+    color: rgb(255, 130, 53);
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+p{
+    color: rgb(255, 255, 255);
+    padding-left: 10px;
+    font-size: 8px;
+}
+
+#play {
+    left: 0px;
+    margin-top: 20px;
+    color: white;
+    height: 50px;
+    width: 100px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(255, 0, 153);
+    cursor: pointer;
+    border: none;
+    transition: width 0.2s ease; /* Transición suave para la expansión */
+    font-size: 20px;
+    margin-bottom: 20px;
+
+}
+
+#play:hover {
+    width: 140px;
+    background-color: rgb(174, 0, 64);
+}
+#reset {
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 40px;
+    width: 80px;
+    color: white;
+    background-color: rgb(49, 49, 49);
+    cursor: pointer;
+    transition: width 0.2s ease; /* Transición suave para la expansión */
+
+}
+
+#reset:hover {
+    width: 100px;
+    background-color: rgb(255, 0, 30);
+}
+
+main {
+    left: 0;
+    margin: 0;
+    align-items: flex-start; /* Alinea las franjas en la parte superior */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: start;
+}
+
+.spacer {
+    width: 100px;
+}
+.eleccion {
+    margin: 10px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 140px;
+}
+
+.franja {
+    position: relative;
+    width: 80px;
+    height: 700px; /* Ocupa todo el alto de la página */
+    transition: width 0.2s ease; /* Transición suave para la expansión */
+    cursor: pointer;
+    transform: rotate(20deg); /* Inclinación de la franja */
+    top: -70px; /* Ajuste para que la franja esté enterrada un poco en el margen superior */
+    overflow: hidden; /* Oculta la parte inferior de las franjas */
+}
+
+/* Imágenes de fondo */
+.franja1,
+.franja2,
+.franja3,
+.franja4,
+.franja5 {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.franja1 {
+    background-image: url("/Rulet/assets/img/1.jpeg"); /* Asegúrate de que esta ruta sea correcta */
+}
+
+.franja2 {
+    background-image: url("/Rulet/assets/img/2.jpeg"); /* Asegúrate de que esta ruta sea correcta */
+}
+
+.franja3 {
+    background-image: url("/Rulet/assets/img/3.jpeg"); /* Asegúrate de que esta ruta sea correcta */
+}
+
+.franja4 {
+    background-image: url("/Rulet/assets/img/4.jpeg"); /* Cambia la ruta de la imagen si es necesario */
+}
+
+.franja5 {
+    background-image: url("/Rulet/assets/img/5.jpeg"); /* Cambia la ruta de la imagen si es necesario */
+}
+
+/* Estilo del pseudo-elemento before para los filtros */
+.franja::before {
+    content: ""; /* Necesario para mostrar el pseudo-elemento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; /* Coloca el filtro detrás del texto */
+    transition: opacity 0.1s ease; /* Transición suave para el efecto hover */
+}
+
+.franja1::before {
+    background-color: rgba(255, 242, 0, 0.625); /* Color de filtro para franja 1 */
+    mix-blend-mode: multiply;
+}
+
+.franja2::before {
+    background-color: rgba(0, 255, 255, 0.329); /* Color de filtro para franja 2 */
+    mix-blend-mode: multiply;
+}
+
+.franja3::before {
+    background-color: rgba(83, 29, 29, 0.329); /* Color de filtro para franja 3 */
+    mix-blend-mode: multiply;
+}
+
+.franja4::before {
+    background-color: rgba(0, 255, 0, 0.192); /* Color de filtro para franja 4 (PLANTA) */
+    mix-blend-mode: multiply;
+}
+
+.franja5::before {
+    background-color: rgba(255, 89, 0, 0.546); /* Color de filtro para franja 5 (FUEGO) */
+    mix-blend-mode: multiply;
+}
+
+.franja:hover {
+    width: 240px; /* Expande 200px hacia los lados */
+}
+
+/* Efecto de brillo tipo espejo */
+.franja::after {
+    content: "";
+    position: absolute;
+    top: -100%; /* Comienza fuera de la vista, arriba */
+    left: 0;
+    right: 0;
+    height: 100%; /* Altura total de la franja */
+    background: linear-gradient(rgb(255, 0, 149), rgba(255, 255, 255, 0)); /* De blanco a transparente */
+    transform: translateX(0); /* Inicialmente no hay desplazamiento */
+    z-index: 2; /* Debe estar encima de la imagen de fondo */
+    transition: transform 0.3s ease; /* Transición para el efecto */
+}
+
+.franja:hover::after {
+    transform: translateY(100%); /* Mueve el brillo hacia abajo */
+}
+
+.texto {
+    position: absolute;
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%) rotate(-90deg); /* Rotar 90 grados */
+    color: white; /* Color del texto */
+    font-size: 40px;
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    z-index: 3; /* Asegúrate de que el texto esté encima del filtro */
+}
+
+@media (max-width: 300px) {
+    /* Ajusta el tamaño según lo necesites */
+    body {
+
+        overflow: scroll; /* Oculta la parte inferior de las franjas */
+    }
+    
+    main {
+        flex-direction: column; /* Cambia la dirección de flex a vertical */
+    }
+
+
+    .franja {
+        width: 100%; /* Haz que las franjas ocupen todo el ancho en dispositivos móviles */
+        height: 80px; /* Ajusta la altura según lo necesites */
+        transform: rotate(0deg); /* Elimina la inclinación */
+        top: 0; /* Restablece la posición superior */
+        margin: 10px 0; /* Añade un margen entre las franjas */
+    }
+
+    .franja:hover {
+        width: 100%; /* Expande al 100% en dispositivos móviles */
+    }
+
+    .texto {
+        font-size: 20px; /* Ajusta el tamaño de fuente para dispositivos móviles */
+        transform: translate(-50%, -50%); /* Asegúrate de centrar el texto */
+    }
+}
