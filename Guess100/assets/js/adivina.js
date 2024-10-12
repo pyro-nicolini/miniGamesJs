@@ -1,5 +1,4 @@
 const genNumber = Math.ceil(Math.random() * 100);
-console.log(genNumber);
 const num = document.getElementById('entrada');
 
 let games = 1;

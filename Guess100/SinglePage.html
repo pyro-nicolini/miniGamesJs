@@ -57,19 +57,19 @@ input, button {
     <div class="container">
         <h1>Adivina el numero</h1>
         <div id="game">
-            <h3>Entre 0 al 100. ¿Puedes ganar en 10 intentos?</h3>
+            <h3>Entre 1 al 100. ¿Puedes ganar en 10 intentos?</h3>
             <input type="text" placeholder="Numero entre 1 y 100" id="entrada">
             <input type="Submit" id="boton" value="Jugar">
         </div>
         <div>
             <h3>Estadisticas</h3>
             <ol id="stats"></ol>
+            <p>by PyrO</p>
         </div>
     </div>
 </body>
 <script>
-    const genNumber = Math.ceil(Math.random() * 100);
-console.log(genNumber);
+const genNumber = Math.ceil(Math.random() * 100);
 const num = document.getElementById('entrada');
 
 let games = 1;
