@@ -34,7 +34,7 @@ body {
 }
 
 .choice {
-    font-size: 12px;
+    font-size: 15px;
     color: rgb(33, 33, 33);
     text-transform: uppercase;
 }
@@ -136,11 +136,11 @@ main {
 .franja {
     position: relative;
     width: 70px;
-    height: 1000px;
+    height: 80rem;
     transition: width 0.2s ease;
     cursor: pointer;
     transform: rotate(20deg);
-    top: -70px;
+    top: -80px;
     overflow: hidden;
 }
 
@@ -234,7 +234,7 @@ main {
 
 .texto {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(-90deg);
     color: white;
@@ -243,7 +243,7 @@ main {
     z-index: 3;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 400px) {
     body {
         overflow: scroll;
     }
@@ -254,24 +254,35 @@ main {
 
     .franja {
         width: 100%;
-        height: 80px;
+        height: 70px;
         transform: rotate(0deg);
         top: 0;
-        margin: 10px 0;
     }
 
-    .franja:hover {
-        width: 100%;
+    .franja:hover,
+    .seleccionado {
+    height: 150px;
+    transition: height 0.3s ease;
+    width: 100%;
     }
 
     .texto {
-        font-size: 20px;
-        transform: translate(-50%, -50%);
+        font-size: 40px;
+        transform: translate(-40%, -40%) !important;
     }
+    
+    #resultado {
+        margin-top: 150px;
+    }
+
+    #ganador {
+        margin-top: 140px;
+    }
+
 }
 
 .salida {
-    animation: moverFuera 1s forwards;
+    animation: moverFuera 2s forwards;
 }
 
 @keyframes moverFuera {
@@ -285,9 +296,7 @@ main {
 
 #resultado {
     position: absolute;
-    top: 20%;
-    left: 60%;
-    transform: translate(-60%, 30%);
+    transform: translate(-80%, -40%);
     background-color: rgba(43, 43, 43, 0.8);
     color: rgb(255, 255, 255);
     padding: 20px;
@@ -298,9 +307,7 @@ main {
 
 #ganador {
     position: absolute;
-    top: 50%;
-    left: 60%;
-    transform: translate(-70%, 100%);
+    transform: translate(-80%, -160%);
     background-color: rgba(43, 43, 43, 0.8);
     color: rgb(255, 255, 255);
     padding: 20px;
@@ -308,17 +315,6 @@ main {
     font-size: 24px;
     z-index: 100;
 }
-
-@media (max-width: 768px) {
-    #resultado {
-        top: calc(20% + 220px);
-    }
-
-    #ganador {
-        top: calc(50% + 350px);
-    }
-}
-
     </style>
 </head>
 <body>
@@ -338,6 +334,9 @@ main {
                 <ul class="choice"></ul>
             </div>
         </div>
+        <!-- Añade esto en tu HTML -->
+        <div id="resultado" style="display: none;"></div>
+        <div id="ganador" style="display: none;"></div>
         <div class="spacer"></div>
 
         <div id="trueno" class="opcion franja franja1">
@@ -355,9 +354,6 @@ main {
         <div id="fuego" class="opcion franja franja5">
             <div class="texto">FUEGO</div>
         </div>
-        <!-- Añade esto en tu HTML -->
-        <div id="resultado" style="display: none;"></div>
-        <div id="ganador" style="display: none;"></div>
                 </div>
     </main>
     <script>
